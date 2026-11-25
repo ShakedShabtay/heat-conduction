@@ -84,7 +84,6 @@ class HeatTransfer(QWidget):
         self.left_temp_spin.setValue(200.0)
         self.left_temp_spin.setSuffix(" °C")
         self.left_temp_spin.setReadOnly(True)
-        self.left_temp_spin.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.left_temp_spin.setMinimumWidth(85)
 
         self.left_mass_spin = QDoubleSpinBox()
@@ -130,7 +129,6 @@ class HeatTransfer(QWidget):
         self.right_temp_spin.setValue(0.0)
         self.right_temp_spin.setSuffix(" °C")
         self.right_temp_spin.setReadOnly(True)
-        self.right_temp_spin.setButtonSymbols(QAbstractSpinBox.NoButtons)
         self.right_temp_spin.setMinimumWidth(85)
 
         self.right_mass_spin = QDoubleSpinBox()

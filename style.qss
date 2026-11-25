@@ -48,4 +48,6 @@ QDoubleSpinBox, QComboBox {
 
 QDoubleSpinBox:read-only {
     background-color: lightgray;
+    color: black;
+    min-height: 20px;
 }

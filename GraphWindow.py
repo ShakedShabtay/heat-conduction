@@ -62,10 +62,34 @@ class GraphWindow(QWidget):
         self.ax.spines['right'].set_visible(False)
 
     def draw_clicked(self):
-        pass
+        if self.main_window is None:
+            return
+        if len(self.main_window.time_history) == 0:
+            return
+
+        selected_body = self.body_combo.currentText()
+        if selected_body == "Body 1":
+            self.ax.plot(
+                self.main_window.time_history,
+                self.main_window.body1_temp_history,
+                color="red",
+                label="Body 1"
+            )
+        else:
+            self.ax.plot(
+                self.main_window.time_history,
+                self.main_window.body2_temp_history,
+                color="blue",
+                label="Body 2"
+            )
+
+        self.ax.legend()
+        self.canvas.draw()
 
     def clear_clicked(self):
-        pass
+        self.ax.clear()
+        self.style_axes()
+        self.canvas.draw()
 
     def export_csv(self):
         pass
