@@ -1,0 +1,17 @@
+class Body:
+    def __init__(self, mass, heat_capacity, temperature):
+        if mass <= 0:
+            raise ValueError("Mass must be greater than 0")
+        if heat_capacity <= 0:
+            raise ValueError("Heat capacity must be greater than 0")
+        if temperature < 0:
+            raise ValueError("Temperature must be 0 or higher")
+
+        self.mass = mass
+        self.heat_capacity = heat_capacity
+        self.temperature = temperature
+
+    def add_heat(self, heat):
+        delta_temp = heat / (self.mass * self.heat_capacity)
+        self.temperature = self.temperature + delta_temp
+        return self.temperature
