@@ -256,6 +256,13 @@ class HeatTransfer(QWidget):
         self.update_body_color(self.left_body_box, new_t1)
         self.update_body_color(self.right_body_box, new_t2)
 
+        #Bounus:
+        if abs(new_t1 - new_t2) < 0.05:
+            self.timer.stop()
+            self.start_btn.setChecked(False)
+            self.start_btn.setText("Start")
+            self.set_inputs_enabled(True)
+
     def open_graphs(self):
         self.graph_window.show()
 
