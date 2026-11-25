@@ -185,11 +185,76 @@ class HeatTransfer(QWidget):
         self.right_temp_spin.setValue(temp)
         self.update_body_color(self.right_body_box, temp)
 
+    def set_inputs_enabled(self, enabled):
+        self.left_slider.setEnabled(enabled)
+        self.right_slider.setEnabled(enabled)
+        self.left_mass_spin.setEnabled(enabled)
+        self.left_cap_spin.setEnabled(enabled)
+        self.right_mass_spin.setEnabled(enabled)
+        self.right_cap_spin.setEnabled(enabled)
+        self.cond_spin.setEnabled(enabled)
+
     def start_stop_button_method(self):
-        pass
+        if self.start_btn.isChecked():
+            self.start_btn.setText("Stop")
+            self.set_inputs_enabled(False)
+
+            self.body1 = Body(
+                self.left_mass_spin.value(),
+                self.left_cap_spin.value(),
+                self.left_temp_spin.value()
+            )
+            self.body2 = Body(
+                self.right_mass_spin.value(),
+                self.right_cap_spin.value(),
+                self.right_temp_spin.value()
+            )
+
+            self.current_time = 0.0
+            self.time_history = [0.0]
+            self.body1_temp_history = [self.body1.temperature]
+            self.body2_temp_history = [self.body2.temperature]
+
+            self.timer.start(100)
+        else:
+            self.timer.stop()
+            self.start_btn.setText("Start")
+            self.set_inputs_enabled(True)
 
     def timer_method(self):
-        pass
+        dt = 0.1
+        conductivity = self.cond_spin.value()
+
+        t1 = self.body1.temperature
+        t2 = self.body2.temperature
+
+        i1 = conductivity * (t2 - t1)
+        i2 = conductivity * (t1 - t2)
+
+        dq1 = i1 * dt
+        dq2 = i2 * dt
+
+        new_t1 = self.body1.add_heat(dq1)
+        new_t2 = self.body2.add_heat(dq2)
+
+        self.current_time = round(self.current_time + dt, 2)
+        self.time_history.append(self.current_time)
+        self.body1_temp_history.append(new_t1)
+        self.body2_temp_history.append(new_t2)
+
+        self.left_temp_spin.setValue(new_t1)
+        self.right_temp_spin.setValue(new_t2)
+
+        self.left_slider.blockSignals(True)
+        self.left_slider.setValue(int(round(new_t1)))
+        self.left_slider.blockSignals(False)
+
+        self.right_slider.blockSignals(True)
+        self.right_slider.setValue(int(round(new_t2)))
+        self.right_slider.blockSignals(False)
+
+        self.update_body_color(self.left_body_box, new_t1)
+        self.update_body_color(self.right_body_box, new_t2)
 
     def open_graphs(self):
         self.graph_window.show()
