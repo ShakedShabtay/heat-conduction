@@ -15,3 +15,9 @@ class Body:
         delta_temp = heat / (self.mass * self.heat_capacity)
         self.temperature = self.temperature + delta_temp
         return self.temperature
+
+    
+if __name__ == "__main__":
+    test_body = Body(100, 0.15, 200)
+    print(test_body.add_heat(20))
+    print(test_body.add_heat(-40))
