@@ -28,3 +28,21 @@ class About(QWidget):
 
         self.github_label = QLabel('<a href="https://github.com/ShakedShabtay/heat-conduction">GitHub Repository</a>')
         self.github_label.setOpenExternalLinks(True)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.title_label)
+        layout.addWidget(self.image_label)
+        layout.addWidget(self.name_label)
+        layout.addWidget(self.email_label)
+        layout.addWidget(self.linkedin_label)
+        layout.addWidget(self.github_label)
+        layout.addStretch()
+
+        self.setLayout(layout)
+
+
+if __name__ == "__main__":
+    app = QApplication()
+    window = About()
+    window.show()
+    app.exec()
