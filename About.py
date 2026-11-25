@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
 from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt
 
 
 class About(QWidget):
@@ -20,8 +21,8 @@ class About(QWidget):
         self.image_label.setPixmap(pixmap)
         self.image_label.setScaledContents(True)
 
-        self.name_label = QLabel("Name:Shaked Shabtay")
-        self.email_label = QLabel("Email:Shaked789@gmail.com")
+        self.name_label = QLabel("Name: Shaked Shabtay")
+        self.email_label = QLabel("Email: Shaked789@gmail.com")
 
         self.linkedin_label = QLabel('<a href="https://www.linkedin.com/in/shaked-shabtay">My LinkedIn Profile</a>')
         self.linkedin_label.setOpenExternalLinks(True)
@@ -30,12 +31,13 @@ class About(QWidget):
         self.github_label.setOpenExternalLinks(True)
 
         layout = QVBoxLayout()
-        layout.addWidget(self.title_label)
-        layout.addWidget(self.image_label)
-        layout.addWidget(self.name_label)
-        layout.addWidget(self.email_label)
-        layout.addWidget(self.linkedin_label)
-        layout.addWidget(self.github_label)
+        layout.addStretch()
+        layout.addWidget(self.title_label, alignment=Qt.AlignCenter)
+        layout.addWidget(self.image_label, alignment=Qt.AlignCenter)
+        layout.addWidget(self.name_label, alignment=Qt.AlignCenter)
+        layout.addWidget(self.email_label, alignment=Qt.AlignCenter)
+        layout.addWidget(self.linkedin_label, alignment=Qt.AlignCenter)
+        layout.addWidget(self.github_label, alignment=Qt.AlignCenter)
         layout.addStretch()
 
         self.setLayout(layout)
