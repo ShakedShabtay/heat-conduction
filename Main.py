@@ -85,6 +85,7 @@ class HeatTransfer(QWidget):
         self.left_temp_spin.setSuffix(" °C")
         self.left_temp_spin.setReadOnly(True)
         self.left_temp_spin.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.left_temp_spin.setMinimumWidth(85)
 
         self.left_mass_spin = QDoubleSpinBox()
         self.left_mass_spin.setRange(0.1, 1000.0)
@@ -130,6 +131,7 @@ class HeatTransfer(QWidget):
         self.right_temp_spin.setSuffix(" °C")
         self.right_temp_spin.setReadOnly(True)
         self.right_temp_spin.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.right_temp_spin.setMinimumWidth(85)
 
         self.right_mass_spin = QDoubleSpinBox()
         self.right_mass_spin.setRange(0.1, 1000.0)
@@ -174,10 +176,14 @@ class HeatTransfer(QWidget):
         widget.setStyleSheet(f"background-color: rgb({red}, 0, 0); border: 1px solid gray;")
 
     def left_temperature_changed(self):
-       pass
+        temp = self.left_slider.value()
+        self.left_temp_spin.setValue(temp)
+        self.update_body_color(self.left_body_box, temp)
 
     def right_temperature_changed(self):
-        pass
+        temp = self.right_slider.value()
+        self.right_temp_spin.setValue(temp)
+        self.update_body_color(self.right_body_box, temp)
 
     def start_stop_button_method(self):
         pass
