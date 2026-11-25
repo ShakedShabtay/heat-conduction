@@ -1,0 +1,51 @@
+QWidget {
+    background-color: whitesmoke;
+    font-size: 14px;
+    color: black;
+}
+
+QLabel#title {
+    font-size: 20px;
+    font-weight: bold;
+    color: darkblue;
+    margin-bottom: 6px;
+}
+
+QPushButton {
+    background-color: royalblue;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: dodgerblue;
+}
+
+QPushButton:pressed {
+    background-color: navy;
+}
+
+QPushButton#start_btn {
+    background-color: forestgreen;
+}
+
+QPushButton#start_btn:checked {
+    background-color: crimson;
+}
+
+QPushButton#about_btn {
+    background-color: slategray;
+}
+
+QDoubleSpinBox, QComboBox {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QDoubleSpinBox:read-only {
+    background-color: lightgray;
+}
