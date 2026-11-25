@@ -60,3 +60,12 @@ class GraphWindow(QWidget):
         self.ax.set_ylabel("Temperature (°C)")
         self.ax.spines['top'].set_visible(False)
         self.ax.spines['right'].set_visible(False)
+
+    def draw_clicked(self):
+        pass
+
+    def clear_clicked(self):
+        pass
+
+    def export_csv(self):
+        pass
