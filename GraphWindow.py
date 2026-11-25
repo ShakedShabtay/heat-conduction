@@ -92,4 +92,26 @@ class GraphWindow(QWidget):
         self.canvas.draw()
 
     def export_csv(self):
-        pass
+        if self.main_window is None:
+            return
+        if len(self.main_window.time_history) == 0:
+            return
+
+        file_path, _ = QFileDialog.getSaveFileName(
+            self, "Save Simulation Results", "heat_conduction.csv", "CSV Files (*.csv)"
+        )
+        if file_path != "":
+            with open(file_path, "w") as f:
+                f.write("Time (s),Body 1 Temperature (C),Body 2 Temperature (C)\n")
+                for i in range(len(self.main_window.time_history)):
+                    t = self.main_window.time_history[i]
+                    t1 = self.main_window.body1_temp_history[i]
+                    t2 = self.main_window.body2_temp_history[i]
+                    f.write(f"{t},{t1:.2f},{t2:.2f}\n")
+
+            if sys.platform == "win32":
+                os.startfile(file_path)
+            elif sys.platform == "darwin":
+                subprocess.run(["open", file_path])
+            else:
+                subprocess.run(["xdg-open", file_path])
